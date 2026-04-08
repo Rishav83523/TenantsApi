@@ -1,0 +1,23 @@
+package main
+
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
+
+
+func (app *application) routes() http.Handler { 
+	g := gin.Default()
+
+	v1 := g.Group("/api/v1")
+	{
+		v1.GET("/tenants", app.getTenants)
+		v1.POST("/tenants", app.createTenant)
+		v1.GET("/tenants/:id", app.getTenantByID)
+		v1.POST("/tenants/:id/projects", app.createProject)
+		v1.GET("/tenants/:id/projects", app.getProjectsByTenantID)
+
+	}
+	return g
+}
