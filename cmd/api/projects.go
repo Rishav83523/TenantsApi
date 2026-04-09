@@ -15,13 +15,13 @@ func (app *application) getProjectsByTenantID(c *gin.Context) {
 		return
 	}
 
-	projects, err := app.models.Projects.GetProjectByID(id)
+	projects, err := app.models.Projects.GetByTenantID(id)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve projects"})
 		return
 	}
 
-	if projects == nil { 
+	if len(projects) == 0 {
 		c.JSON(http.StatusNotFound, gin.H{"error": "No projects found for this tenant"})
 		return
 	}
@@ -45,13 +45,13 @@ func (app *application) createProject(c *gin.Context) {
 		return
 	}
 
-	err = app.models.Projects.Create(id, project.Name, project.Description)
+	createdProject, err := app.models.Projects.Create(id, project.Name, project.Description)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create project"})
 		return
 	}
 
-	c.JSON(http.StatusCreated, project)
+	c.JSON(http.StatusCreated, createdProject)
 
 
 

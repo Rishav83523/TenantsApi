@@ -17,6 +17,8 @@ func (app *application) routes() http.Handler {
 		v1.GET("/tenants/:id", app.getTenantByID)
 		v1.POST("/tenants/:id/projects", app.createProject)
 		v1.GET("/tenants/:id/projects", app.getProjectsByTenantID)
+		v1.POST("/projects/:id/services", app.createService)
+		v1.GET("/projects/:id/services", app.getServices)
 
 	}
 	return g
