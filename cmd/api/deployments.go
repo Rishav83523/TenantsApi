@@ -8,6 +8,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// getDeploymentsByServiceID godoc
+// @Summary List deployments by service
+// @Description Get all deployments for a service id
+// @Tags Deployments
+// @Produce json
+// @Param id path int true "Service ID"
+// @Success 200 {array} database.Deployment
+// @Failure 400 {object} errorResponse
+// @Failure 404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Router /services/{id}/deployments [get]
 func (app *application) getDeploymentsByServiceID(c *gin.Context) { 
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {	
@@ -29,7 +40,18 @@ func (app *application) getDeploymentsByServiceID(c *gin.Context) {
 	c.JSON(http.StatusOK, deployments)
 }
 
-
+// createDeployment godoc
+// @Summary Create deployment
+// @Description Create a new deployment for a service
+// @Tags Deployments
+// @Accept json
+// @Produce json
+// @Param id path int true "Service ID"
+// @Param payload body createDeploymentRequest true "Deployment payload"
+// @Success 201 {object} database.Deployment
+// @Failure 400 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Router /services/{id}/deployments [post]
 func (app *application) createDeployment(c *gin.Context) { 
 	id, err := strconv.Atoi(c.Param("id"))
 

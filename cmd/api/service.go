@@ -8,8 +8,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-
-
+// getServices godoc
+// @Summary List services by project
+// @Description Get all services for a project id
+// @Tags Services
+// @Produce json
+// @Param id path int true "Project ID"
+// @Success 200 {array} database.Service
+// @Failure 400 {object} errorResponse
+// @Failure 404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Router /projects/{id}/services [get]
 func (app *application)  getServices(c *gin.Context) { 
     id,err := strconv.Atoi(c.Param("id"))
 
@@ -34,7 +43,17 @@ func (app *application)  getServices(c *gin.Context) {
 
 }
 
-
+// createService godoc
+// @Summary Create service
+// @Description Create a new service for a project
+// @Tags Services
+// @Accept json
+// @Produce json
+// @Param id path int true "Project ID"
+// @Param payload body createServiceRequest true "Service payload"
+// @Success 201 {object} database.Service
+// @Failure 400 {object} errorResponse
+// @Router /projects/{id}/services [post]
 func (app *application) createService(c *gin.Context) { 
 	id, err := strconv.Atoi(c.Param("id"))
 

@@ -5,9 +5,24 @@ import (
 	"log"
 	"rest-api-in-gin/internal/database"
 
+	_ "rest-api-in-gin/docs"
+
 	_ "modernc.org/sqlite"
 )
 
+// @title Tenants API
+// @version 1.0
+// @description REST API for tenants, projects, services, and deployments.
+// @BasePath /api/v1
+// @schemes http
+// @tag.name Tenants
+// @tag.description Tenant management endpoints.
+// @tag.name Projects
+// @tag.description Project management endpoints.
+// @tag.name Services
+// @tag.description Service management endpoints.
+// @tag.name Deployments
+// @tag.description Deployment management endpoints.
 
 type application struct { 
 	port int

@@ -8,7 +8,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-
+// getTenants godoc
+// @Summary List tenants
+// @Description Get all tenants
+// @Tags Tenants
+// @Produce json
+// @Success 200 {array} database.Tenat
+// @Failure 500 {object} errorResponse
+// @Router /tenants [get]
 func (app *application) getTenants(c *gin.Context) { 
     tenants, err := app.models.Tenants.GetAll()
 	if err != nil {
@@ -18,7 +25,17 @@ func (app *application) getTenants(c *gin.Context) {
 	c.JSON(http.StatusOK, tenants)
 }
 
-
+// createTenant godoc
+// @Summary Create tenant
+// @Description Create a new tenant
+// @Tags Tenants
+// @Accept json
+// @Produce json
+// @Param payload body createTenantRequest true "Tenant payload"
+// @Success 201 {object} database.Tenat
+// @Failure 400 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Router /tenants [post]
 func (app *application) createTenant(c *gin.Context) { 
 var tenant database.Tenat
 
@@ -38,6 +55,16 @@ c.JSON(http.StatusCreated, tenant)
 
 }
 
+// getTenantByID godoc
+// @Summary Get tenant by id
+// @Description Get a tenant by tenant id
+// @Tags Tenants
+// @Produce json
+// @Param id path int true "Tenant ID"
+// @Success 200 {object} database.Tenat
+// @Failure 400 {object} errorResponse
+// @Failure 404 {object} errorResponse
+// @Router /tenants/{id} [get]
 func (app *application) getTenantByID(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {

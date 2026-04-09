@@ -8,6 +8,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// getProjectsByTenantID godoc
+// @Summary List projects by tenant
+// @Description Get all projects for a tenant id
+// @Tags Projects
+// @Produce json
+// @Param id path int true "Tenant ID"
+// @Success 200 {array} database.Project
+// @Failure 400 {object} errorResponse
+// @Failure 404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Router /tenants/{id}/projects [get]
 func (app *application) getProjectsByTenantID(c *gin.Context) { 
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
@@ -30,7 +41,18 @@ func (app *application) getProjectsByTenantID(c *gin.Context) {
 
 }
 
-
+// createProject godoc
+// @Summary Create project
+// @Description Create a new project for a tenant
+// @Tags Projects
+// @Accept json
+// @Produce json
+// @Param id path int true "Tenant ID"
+// @Param payload body createProjectRequest true "Project payload"
+// @Success 201 {object} database.Project
+// @Failure 400 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Router /tenants/{id}/projects [post]
 func (app *application) createProject(c *gin.Context) { 
 	id, err := strconv.Atoi(c.Param("id"))
 
